@@ -34,6 +34,10 @@
           Email ou senha inválidos
         </p>
 
+        <a href="/register" class="text-indigo-600 hover:underline text-sm block text-center">
+          Não tem uma conta? Cadastre-se  
+        </a>
+
       </div>
 
     </div>
@@ -43,17 +47,29 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { handleLogin } from '@/service/service'
 
+const router = useRouter()
 const email = ref('')
 const password = ref('')
 const error = ref(false)
 
-function loginUser() {
-  // simulação
-  if (email.value === 'admin@email.com' && password.value === '123456') {
-    alert('Login OK')
-  } else {
+async function loginUser() {
+  try {
+    // Validar credenciais (simulação)
+    if (email.value === 'admin@findflow.com' && password.value === '123456') {
+      // Chamar a função handleLogin para redirecionar
+      await handleLogin({
+        email: email.value,
+        password: password.value
+      }, router)
+    } else {
+      error.value = true
+    }
+  } catch (err) {
     error.value = true
+    console.error('Erro no login:', err)
   }
 }
 </script>
