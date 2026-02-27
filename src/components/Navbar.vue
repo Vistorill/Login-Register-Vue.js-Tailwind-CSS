@@ -6,16 +6,8 @@
         Meu Sistema
       </h2>
 
-      <div class="flex items-center gap-6">
-        <span>Olá, usuário</span>
-        <a
-          href="#"
-          @click.prevent="logout"
-          class="text-red-400 hover:text-red-300 font-medium transition"
-        >
-          Sair
-        </a>
-      </div>
+      <!-- user actions component handles icon and menu -->
+      <UserMenu />
 
     </nav>
 
@@ -24,16 +16,5 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-function logout() {
-  // exemplo de limpeza de sessão
-  localStorage.removeItem('token')
-  sessionStorage.clear()
-
-  // redireciona para login
-  router.push('/login')
-}
+import UserMenu from './UserMenu.vue'
 </script>
